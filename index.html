@@ -71,18 +71,19 @@
             padding: 30px;
         }
 
+        /* --- AJUSTE FINAL AQUI --- */
         .slide img {
-            width: 100%;
+            max-width: 85%; /* Imagem ocupa 85% do espaço para ter um respiro */
             height: auto;
             display: block;
+            margin: 0 auto 25px auto; /* Centraliza a imagem horizontalmente */
             border-radius: 12px;
             border: 2px solid var(--border-color);
-            margin-bottom: 25px;
-            cursor: zoom-in; /* Indica que a imagem é clicável para zoom */
-            transition: transform 0.3s ease;
+            cursor: zoom-in;
+            transition: transform 0.3s ease, border-color 0.3s ease;
         }
         .slide img:hover {
-            transform: scale(1.02);
+            transform: scale(1.03);
             border-color: var(--primary-color);
         }
 
@@ -172,7 +173,7 @@
             text-align: center;
             font-size: 14px;
             color: var(--text-muted-color);
-            z-index: 150; /* Z-index alto para garantir visibilidade */
+            z-index: 150;
         }
 
         footer a {
@@ -189,7 +190,6 @@
             background-color: var(--primary-color);
         }
 
-        /* --- NOVO CÓDIGO PARA O LIGHTBOX (ZOOM) --- */
         .lightbox {
             position: fixed;
             top: 0;
@@ -205,6 +205,8 @@
             opacity: 0;
             visibility: hidden;
             transition: opacity 0.3s ease, visibility 0.3s ease;
+            padding: 20px;
+            box-sizing: border-box;
         }
 
         .lightbox.active {
@@ -213,8 +215,8 @@
         }
 
         .lightbox img {
-            max-width: 90%;
-            max-height: 90%;
+            max-width: 100%;
+            max-height: 100%;
             border-radius: 5px;
             transform: scale(0.8);
             transition: transform 0.3s ease;
@@ -235,6 +237,7 @@
             .text-content h2 { font-size: 1.8rem; }
             .text-content p { font-size: 1rem; }
             .nav-button { display: none; }
+            .slide img { max-width: 100%; } /* Em telas pequenas, volta a ocupar 100% */
         }
     </style>
 </head>
@@ -335,7 +338,6 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // --- CÓDIGO DOS SLIDES (SEM ALTERAÇÃO) ---
             const slidesContainer = document.querySelector('.slides');
             const slides = document.querySelectorAll('.slide');
             const prevBtn = document.getElementById('prevBtn');
@@ -383,21 +385,17 @@
 
             updateSlideUi();
 
-            // --- NOVO CÓDIGO PARA O LIGHTBOX (ZOOM) ---
             const lightbox = document.getElementById('lightbox');
             const lightboxImg = document.getElementById('lightbox-img');
             const zoomableImages = document.querySelectorAll('.zoomable');
 
             zoomableImages.forEach(image => {
                 image.addEventListener('click', () => {
-                    // Pega o caminho da imagem clicada e a coloca no lightbox
                     lightboxImg.src = image.src;
-                    // Mostra o lightbox
                     lightbox.classList.add('active');
                 });
             });
 
-            // Fecha o lightbox ao clicar nele
             lightbox.addEventListener('click', () => {
                 lightbox.classList.remove('active');
             });
