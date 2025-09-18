@@ -80,22 +80,20 @@
             grid-template-columns: 1fr 1.2fr;
         }
 
+        /* --- MUDANÇAS PRINCIPAIS AQUI --- */
         .slide .image-container {
-            height: 65vh; 
-            max-height: 550px;
+            /* A altura não é mais fixa */
             width: 100%;
-            overflow: hidden;
-            padding: 20px; /* Adiciona um respiro para a imagem */
+            padding: 20px;
             box-sizing: border-box;
         }
 
         .slide img {
+            /* A imagem define sua própria altura para manter a proporção */
             width: 100%;
-            height: 100%;
-            /* AJUSTE PRINCIPAL AQUI: Garante que a imagem inteira apareça */
-            object-fit: contain; 
-            object-position: center; /* Centraliza a imagem no espaço */
+            height: auto; 
             display: block;
+            border-radius: 8px; /* Adiciona um leve arredondamento */
         }
 
         .text-content {
@@ -202,7 +200,6 @@
                 grid-template-columns: 1fr;
             }
             .slide .image-container {
-                height: 35vh; /* Ajuste para mobile */
                 padding: 10px;
             }
             .text-content {
