@@ -121,13 +121,12 @@
             font-weight: 600;
         }
 
-        /* --- NOVO ESTILO PARA O BOTÃO DO LINK --- */
         .prototype-link {
             display: inline-block;
-            margin-top: 25px; /* Espaço acima do botão */
+            margin-top: 25px;
             padding: 12px 24px;
             background-color: var(--primary-color);
-            color: #16213e; /* Cor do fundo para contraste */
+            color: #16213e;
             font-weight: 600;
             font-size: 1rem;
             border-radius: 8px;
@@ -206,6 +205,21 @@
             z-index: 150;
         }
         
+        /* --- ESTILO DO LINK DO RODAPÉ CORRIGIDO --- */
+        footer a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s;
+            background-color: rgba(22, 33, 62, 0.7);
+            padding: 5px 10px;
+            border-radius: 8px;
+        }
+        footer a:hover {
+            color: white;
+            background-color: var(--primary-color);
+        }
+
         .lightbox {
             position: fixed;
             top: 0;
@@ -379,7 +393,7 @@
     </div>
 
     <footer>
-        Protótipo Funcional Conecta+
+        <a href="https://by-lelaebirds.github.io/conecta-plus-mvp/" target="_blank">Acessar Protótipo Online</a>
     </footer>
 
     <script>
