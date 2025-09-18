@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apresentação do Protótipo | Conecta+</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+        :root {
+            /* Cores adaptadas do seu style.css */
+            --bg-color: #1a1a2e; /* Fundo roxo escuro */
+            --card-bg-color: #16213e; /* Superfície do card */
+            --primary-color: #00F5D4; /* Verde-água/Ciano para destaque */
+            --text-color: #e0e0e0;
+            --text-muted-color: #9fa8da;
+            --shadow-color: rgba(0, 0, 0, 0.5);
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: linear-gradient(45deg, #1a1a2e, #16213e, #0f3460);
+            background-size: cover;
+            background-position: center;
+            filter: blur(8px) brightness(0.6);
+            z-index: -1;
+        }
+
+        .presentation-container {
+            width: 100%;
+            max-width: 950px; /* Um pouco maior para caber mais texto */
+            margin: auto 20px;
+            position: relative;
+        }
+
+        .slides-viewport {
+            overflow: hidden;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px var(--shadow-color);
+            border: 1px solid #2a3a64;
+        }
+
+        .slides {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .slide {
+            min-width: 100%;
+            box-sizing: border-box;
+            background-color: var(--card-bg-color);
+            overflow: hidden;
+        }
+
+        .slide-content {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .slide:nth-child(even) .slide-content {
+            grid-template-columns: 1.2fr 1fr;
+        }
+
+        .slide img {
+            width: 100%;
+            height: 520px;
+            object-fit: cover;
+            object-position: top; /* Garante que o topo da tela seja mostrado */
+            display: block;
+            transition: transform 0.4s ease-out;
+        }
+
+        .slide:hover img {
+            transform: scale(1.02);
+        }
+
+        .text-content {
+            padding: 40px;
+        }
+        
+        .text-content h2 {
+            margin: 0 0 15px 0;
+            color: var(--primary-color);
+            font-size: 2.1rem;
+            font-weight: 700;
+        }
+        
+        .text-content p {
+            line-height: 1.7;
+            font-size: 1.05rem;
+            color: var(--text-muted-color);
+        }
+        
+        .text-content strong {
+            color: var(--text-color);
+            font-weight: 600;
+        }
+
+        .nav-button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(22, 33, 62, 0.7);
+            border: 1px solid #2a3a64;
+            color: white;
+            padding: 15px;
+            cursor: pointer;
+            border-radius: 50%;
+            z-index: 100;
+            font-size: 24px;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: background-color 0.2s, transform 0.2s;
+        }
+
+        .nav-button:hover {
+            background-color: rgba(0, 245, 212, 0.9);
+            transform: translateY(-50%) scale(1.1);
+            color: #16213e;
+        }
+
+        #prevBtn {
+            left: -25px;
+        }
+
+        #nextBtn {
+            right: -25px;
+        }
+
+        .nav-dots {
+            position: absolute;
+            bottom: -40px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 12px;
+        }
+
+        .dot {
+            cursor: pointer;
+            height: 12px;
+            width: 12px;
+            background-color: var(--card-bg-color);
+            border-radius: 50%;
+            display: inline-block;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            border: 2px solid var(--primary-color);
+        }
+
+        .dot.active, .dot:hover {
+            background-color: var(--primary-color);
+            transform: scale(1.1);
+        }
+        
+        footer {
+            position: absolute;
+            bottom: 10px;
+            width: 100%;
+            text-align: center;
+            font-size: 12px;
+            color: var(--text-muted-color);
+            z-index: 10;
+        }
+
+        @media (max-width: 1050px) {
+            #prevBtn { left: 15px; }
+            #nextBtn { right: 15px; }
+        }
+
+        @media (max-width: 950px) {
+            .presentation-container {
+                margin: 20px;
+            }
+            .slide-content, .slide:nth-child(even) .slide-content {
+                grid-template-columns: 1fr;
+            }
+            .slide img {
+                height: 280px;
+                border-radius: 0;
+            }
+            .text-content {
+                padding: 30px;
+            }
+            .nav-dots {
+                bottom: -35px;
+            }
+            .nav-button {
+                display: none; /* Esconde setas em telas menores */
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="presentation-container">
+        <div class="slides-viewport">
+            <div class="slides">
+                
+                <div class="slide">
+                    <div class="slide-content">
+                        <img src="dashboard.png" alt="Tela de Dashboard do Conecta+">
+                        <div class="text-content">
+                            <h2>Conecta+: A Solução Completa</h2>
+                            <p>Apresentamos o protótipo funcional da <strong>Conecta+</strong>, uma plataforma web projetada para conectar prestadores de serviços locais a clientes de forma <strong>rápida, segura e transparente</strong>. Este é o seu centro de controle, onde todos os seus pedidos de serviço são gerenciados.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="slide">
+                    <div class="slide-content">
+                        <img src="login.png" alt="Tela de Login do Conecta+">
+                        <div class="text-content">
+                            <h2>1. Acesso Seguro e Direto</h2>
+                            <p>A jornada começa com uma tela de <strong>login limpa e intuitiva</strong>. O acesso é simplificado, garantindo que clientes e prestadores entrem na plataforma com segurança e sem complicações, prontos para resolver ou oferecer serviços.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="slide">
+                    <div class="slide-content">
+                        <img src="novo-pedido.png" alt="Modal de criação de um novo pedido de serviço">
+                        <div class="text-content">
+                            <h2>2. Crie Pedidos Detalhados</h2>
+                            <p>Com o clique de um botão, o cliente pode abrir um formulário para <strong>publicar uma nova demanda</strong>. É possível adicionar título, categoria, descrição, prazo desejado e até <strong>anexar fotos</strong> para fornecer o máximo de detalhes ao prestador.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="slide">
+                    <div class="slide-content">
+                        <img src="pedido-publicado.png" alt="Dashboard mostrando o novo pedido publicado no topo da lista">
+                        <div class="text-content">
+                            <h2>3. Seu Pedido, Publicado!</h2>
+                            <p>Após a publicação, o novo serviço aparece instantaneamente no topo do dashboard "Meus Pedidos". O status inicial é "Aberto", indicando que o cliente agora está <strong>pronto para receber propostas</strong> dos melhores profissionais da plataforma.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="slide">
+                    <div class="slide-content">
+                        <img src="prestadores.png" alt="Tela para encontrar prestadores de serviço">
+                        <div class="text-content">
+                            <h2>4. Encontre o Profissional Ideal</h2>
+                            <p>Na aba "Encontrar Prestadores", o cliente tem acesso a uma vitrine de profissionais qualificados. Cada card exibe informações essenciais como <strong>nome, especialidade e avaliação média</strong>, facilitando a primeira triagem.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="slide">
+                    <div class="slide-content">
+                        <img src="perfil.png" alt="Perfil detalhado de um prestador de serviços">
+                        <div class="text-content">
+                            <h2>5. Perfis Detalhados para Confiança</h2>
+                            <p>Ao clicar em um profissional, o cliente visualiza um perfil completo com <strong>descrição, portfólio, lista de serviços, preços estimados e avaliações</strong> de outros clientes. Um diferencial são as "Badges", que gamificam e reconhecem as conquistas do prestador.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="slide">
+                    <div class="slide-content">
+                        <img src="chat.png" alt="Tela de chat interno da plataforma">
+                        <div class="text-content">
+                            <h2>6. Comunicação Centralizada</h2>
+                            <p>Diga adeus à desorganização. O <strong>chat interno</strong> permite que clientes e prestadores negociem detalhes, ajustem orçamentos e combinem prazos, mantendo todo o histórico da conversa salvo e associado ao serviço específico.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="slide">
+                    <div class="slide-content">
+                        <img src="avaliacao.png" alt="Tela de avaliação de um serviço concluído">
+                        <div class="text-content">
+                            <h2>7. Feedback que Constrói Reputação</h2>
+                            <p>Após a conclusão de um serviço, o cliente é convidado a <strong>avaliar o profissional</strong> com uma nota de 1 a 5 estrelas e um comentário. Esse feedback é crucial para manter a qualidade da plataforma e ajudar outros usuários a fazerem boas escolhas.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="slide">
+                    <div class="slide-content">
+                        <img src="tema-escuro.png" alt="Interface do Conecta+ com o tema escuro ativado">
+                        <div class="text-content">
+                            <h2>8. Experiência Personalizada</h2>
+                            <p>Pensando no conforto visual do usuário, a plataforma oferece a opção de <strong>alternar entre os temas claro e escuro</strong>. A escolha é salva e persiste durante toda a navegação, adaptando a interface à preferência de cada um.</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        
+        <button id="prevBtn" class="nav-button">&#10094;</button>
+        <button id="nextBtn" class="nav-button">&#10095;</button>
+
+        <div class="nav-dots"></div>
+    </div>
+    
+    <footer>Protótipo Funcional Conecta+ | Setembro 2025</footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const slidesContainer = document.querySelector('.slides');
+            const slides = document.querySelectorAll('.slide');
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            const dotsContainer = document.querySelector('.nav-dots');
+
+            let currentSlide = 0;
+            const totalSlides = slides.length;
+
+            slides.forEach((_, index) => {
+                const dot = document.createElement('div');
+                dot.classList.add('dot');
+                if (index === 0) dot.classList.add('active');
+                dot.addEventListener('click', () => goToSlide(index));
+                dotsContainer.appendChild(dot);
+            });
+
+            const dots = document.querySelectorAll('.dot');
+
+            function updateSlideUi() {
+                slidesContainer.style.transform = `translateX(-${currentSlide * 100}%)`;
+                
+                dots.forEach((dot, index) => {
+                    dot.classList.toggle('active', index === currentSlide);
+                });
+
+                prevBtn.style.opacity = currentSlide === 0 ? '0.3' : '1';
+                prevBtn.style.pointerEvents = currentSlide === 0 ? 'none' : 'auto';
+                nextBtn.style.opacity = currentSlide === totalSlides - 1 ? '0.3' : '1';
+                nextBtn.style.pointerEvents = currentSlide === totalSlides - 1 ? 'none' : 'auto';
+            }
+
+            function goToSlide(slideIndex) {
+                currentSlide = slideIndex;
+                updateSlideUi();
+            }
+
+            nextBtn.addEventListener('click', () => {
+                if (currentSlide < totalSlides - 1) {
+                    currentSlide++;
+                    updateSlideUi();
+                }
+            });
+
+            prevBtn.addEventListener('click', () => {
+                if (currentSlide > 0) {
+                    currentSlide--;
+                    updateSlideUi();
+                }
+            });
+            
+            // Navegação pelo teclado
+            document.addEventListener('keydown', (e) => {
+                if(e.key === 'ArrowRight') {
+                    nextBtn.click();
+                } else if (e.key === 'ArrowLeft') {
+                    prevBtn.click();
+                }
+            });
+
+            updateSlideUi();
+        });
+    </script>
+</body>
+</html>
