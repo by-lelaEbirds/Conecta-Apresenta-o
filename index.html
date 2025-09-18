@@ -46,7 +46,7 @@
 
         .presentation-container {
             width: 100%;
-            max-width: 900px;
+            max-width: 950px;
             margin: auto 20px;
             position: relative;
         }
@@ -68,27 +68,35 @@
             box-sizing: border-box;
             background-color: var(--card-bg-color);
             overflow: hidden;
-            padding: 30px;
         }
 
-        /* --- AJUSTE FINAL AQUI --- */
+        /* --- RESTAURAÇÃO DO LAYOUT EM DUAS COLUNAS --- */
+        .slide-content {
+            display: grid;
+            grid-template-columns: 1fr 1.1fr; /* Proporção equilibrada */
+            align-items: center;
+            gap: 0; /* Sem gap para a imagem preencher a borda */
+        }
+
+        .slide:nth-child(even) .slide-content {
+            grid-template-columns: 1.1fr 1fr;
+        }
+
         .slide img {
-            max-width: 85%; /* Imagem ocupa 85% do espaço para ter um respiro */
-            height: auto;
+            width: 100%;
+            height: 500px; /* Altura fixa para um layout consistente */
+            object-fit: cover; /* Cobre o espaço, funcionando como thumbnail */
+            object-position: top; /* Prioriza o topo do print */
             display: block;
-            margin: 0 auto 25px auto; /* Centraliza a imagem horizontalmente */
-            border-radius: 12px;
-            border: 2px solid var(--border-color);
             cursor: zoom-in;
-            transition: transform 0.3s ease, border-color 0.3s ease;
+            transition: transform 0.3s ease;
         }
         .slide img:hover {
             transform: scale(1.03);
-            border-color: var(--primary-color);
         }
 
         .text-content {
-            text-align: center;
+            padding: 40px;
         }
         
         .text-content h2 {
@@ -102,8 +110,6 @@
             line-height: 1.7;
             font-size: 1.1rem;
             color: var(--text-muted-color);
-            max-width: 700px;
-            margin: 0 auto;
         }
         
         .text-content strong {
@@ -233,11 +239,14 @@
 
         @media (max-width: 768px) {
             .presentation-container { margin: 15px; }
-            .slide { padding: 20px; }
-            .text-content h2 { font-size: 1.8rem; }
-            .text-content p { font-size: 1rem; }
+            .slide-content, .slide:nth-child(even) .slide-content {
+                grid-template-columns: 1fr; /* Volta a ser coluna única em telas pequenas */
+            }
+            .slide img {
+                height: 250px; /* Altura menor para mobile */
+            }
+            .text-content { padding: 30px; }
             .nav-button { display: none; }
-            .slide img { max-width: 100%; } /* Em telas pequenas, volta a ocupar 100% */
         }
     </style>
 </head>
@@ -248,74 +257,92 @@
             <div class="slides">
                 
                 <div class="slide">
-                    <img src="dashboard.png" alt="Tela de Dashboard do Conecta+" class="zoomable">
-                    <div class="text-content">
-                        <h2>Conecta+: A Solução Completa</h2>
-                        <p>Apresentamos o protótipo funcional da <strong>Conecta+</strong>, uma plataforma web projetada para conectar prestadores de serviços locais a clientes de forma <strong>rápida, segura e transparente</strong>.</p>
+                    <div class="slide-content">
+                        <img src="dashboard.png" alt="Tela de Dashboard do Conecta+" class="zoomable">
+                        <div class="text-content">
+                            <h2>Conecta+: A Solução Completa</h2>
+                            <p>Apresentamos o protótipo funcional da <strong>Conecta+</strong>, uma plataforma web projetada para conectar prestadores de serviços locais a clientes de forma <strong>rápida, segura e transparente</strong>.</p>
+                        </div>
                     </div>
                 </div>
 
                 <div class="slide">
-                    <img src="login.png" alt="Tela de Login do Conecta+" class="zoomable">
-                    <div class="text-content">
-                        <h2>1. Acesso Seguro e Direto</h2>
-                        <p>A jornada começa com uma tela de <strong>login limpa e intuitiva</strong>, garantindo que clientes e prestadores entrem na plataforma com segurança e sem complicações.</p>
+                    <div class="slide-content">
+                        <div class="text-content">
+                            <h2>1. Acesso Seguro e Direto</h2>
+                            <p>A jornada começa com uma tela de <strong>login limpa e intuitiva</strong>, garantindo que clientes e prestadores entrem na plataforma com segurança e sem complicações.</p>
+                        </div>
+                        <img src="login.png" alt="Tela de Login do Conecta+" class="zoomable">
                     </div>
                 </div>
 
                 <div class="slide">
-                    <img src="novo-pedido.png" alt="Modal de criação de um novo pedido de serviço" class="zoomable">
-                    <div class="text-content">
-                        <h2>2. Crie Pedidos Detalhados</h2>
-                        <p>O cliente pode <strong>publicar uma nova demanda</strong> adicionando título, categoria, descrição, prazo e até <strong>fotos</strong> para fornecer o máximo de detalhes ao prestador.</p>
+                     <div class="slide-content">
+                        <img src="novo-pedido.png" alt="Modal de criação de um novo pedido de serviço" class="zoomable">
+                        <div class="text-content">
+                            <h2>2. Crie Pedidos Detalhados</h2>
+                            <p>O cliente pode <strong>publicar uma nova demanda</strong> adicionando título, categoria, descrição, prazo e até <strong>fotos</strong> para fornecer o máximo de detalhes ao prestador.</p>
+                        </div>
                     </div>
                 </div>
 
                 <div class="slide">
-                    <img src="pedido-publicado.png" alt="Dashboard mostrando o novo pedido publicado no topo da lista" class="zoomable">
-                    <div class="text-content">
-                        <h2>3. Seu Pedido, Publicado!</h2>
-                        <p>Após a publicação, o novo serviço aparece instantaneamente no dashboard, pronto para <strong>receber propostas</strong> dos melhores profissionais da plataforma.</p>
+                    <div class="slide-content">
+                        <div class="text-content">
+                            <h2>3. Seu Pedido, Publicado!</h2>
+                            <p>Após a publicação, o novo serviço aparece instantaneamente no dashboard, pronto para <strong>receber propostas</strong> dos melhores profissionais da plataforma.</p>
+                        </div>
+                        <img src="pedido-publicado.png" alt="Dashboard mostrando o novo pedido publicado no topo da lista" class="zoomable">
                     </div>
                 </div>
 
                 <div class="slide">
-                    <img src="prestadores.png" alt="Tela para encontrar prestadores de serviço" class="zoomable">
-                    <div class="text-content">
-                        <h2>4. Encontre o Profissional Ideal</h2>
-                        <p>Uma vitrine de profissionais qualificados com informações essenciais como <strong>nome, especialidade e avaliação média</strong>, facilitando a escolha.</p>
+                    <div class="slide-content">
+                        <img src="prestadores.png" alt="Tela para encontrar prestadores de serviço" class="zoomable">
+                        <div class="text-content">
+                            <h2>4. Encontre o Profissional Ideal</h2>
+                            <p>Uma vitrine de profissionais qualificados com informações essenciais como <strong>nome, especialidade e avaliação média</strong>, facilitando a escolha.</p>
+                        </div>
                     </div>
                 </div>
 
                 <div class="slide">
-                   <img src="perfil.png" alt="Perfil detalhado de um prestador de serviços" class="zoomable">
-                   <div class="text-content">
-                        <h2>5. Perfis Detalhados para Confiança</h2>
-                        <p>O perfil completo exibe <strong>portfólio, serviços, preços e avaliações</strong>, além de "Badges" que reconhecem as conquistas do prestador.</p>
+                   <div class="slide-content">
+                        <div class="text-content">
+                            <h2>5. Perfis Detalhados para Confiança</h2>
+                            <p>O perfil completo exibe <strong>portfólio, serviços, preços e avaliações</strong>, além de "Badges" que reconhecem as conquistas do prestador.</p>
+                        </div>
+                        <img src="perfil.png" alt="Perfil detalhado de um prestador de serviços" class="zoomable">
                     </div>
                 </div>
 
                 <div class="slide">
-                    <img src="chat.png" alt="Tela de chat interno da plataforma" class="zoomable">
-                    <div class="text-content">
-                        <h2>6. Comunicação Centralizada</h2>
-                        <p>O <strong>chat interno</strong> permite negociar detalhes e ajustar orçamentos, mantendo todo o histórico da conversa salvo e organizado.</p>
+                    <div class="slide-content">
+                        <img src="chat.png" alt="Tela de chat interno da plataforma" class="zoomable">
+                        <div class="text-content">
+                            <h2>6. Comunicação Centralizada</h2>
+                            <p>O <strong>chat interno</strong> permite negociar detalhes e ajustar orçamentos, mantendo todo o histórico da conversa salvo e organizado.</p>
+                        </div>
                     </div>
                 </div>
                 
                 <div class="slide">
-                    <img src="avaliacao.png" alt="Tela de avaliação de um serviço concluído" class="zoomable">
-                    <div class="text-content">
-                        <h2>7. Feedback que Constrói Reputação</h2>
-                        <p>Ao final do serviço, o cliente <strong>avalia o profissional</strong>, ajudando a manter a qualidade da plataforma e a guiar outros usuários.</p>
+                    <div class="slide-content">
+                        <div class="text-content">
+                            <h2>7. Feedback que Constrói Reputação</h2>
+                            <p>Ao final do serviço, o cliente <strong>avalia o profissional</strong>, ajudando a manter a qualidade da plataforma e a guiar outros usuários.</p>
+                        </div>
+                        <img src="avaliacao.png" alt="Tela de avaliação de um serviço concluído" class="zoomable">
                     </div>
                 </div>
 
                 <div class="slide">
-                    <img src="tema-escuro.png" alt="Interface do Conecta+ com o tema escuro ativado" class="zoomable">
-                    <div class="text-content">
-                        <h2>8. Experiência Personalizada</h2>
-                        <p>A plataforma oferece a opção de <strong>alternar entre os temas claro e escuro</strong>, adaptando a interface à preferência de cada um.</p>
+                    <div class="slide-content">
+                        <img src="tema-escuro.png" alt="Interface do Conecta+ com o tema escuro ativado" class="zoomable">
+                        <div class="text-content">
+                            <h2>8. Experiência Personalizada</h2>
+                            <p>A plataforma oferece a opção de <strong>alternar entre os temas claro e escuro</strong>, adaptando a interface à preferência de cada um.</p>
+                        </div>
                     </div>
                 </div>
 
