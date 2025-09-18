@@ -11,6 +11,7 @@
             --bg-color: #1a1a2e;
             --card-bg-color: #16213e;
             --primary-color: #00F5D4;
+            --secondary-color: #38bdf8; /* Cor para o novo botão */
             --text-color: #e0e0e0;
             --text-muted-color: #9fa8da;
             --shadow-color: rgba(0, 0, 0, 0.5);
@@ -114,6 +115,7 @@
             line-height: 1.7;
             font-size: 1.1rem;
             color: var(--text-muted-color);
+            margin-bottom: 25px; /* Espaço entre o texto e os botões */
         }
         
         .text-content strong {
@@ -121,9 +123,14 @@
             font-weight: 600;
         }
 
+        /* --- CONTAINER PARA OS BOTÕES --- */
+        .slide-buttons {
+            display: flex;
+            gap: 15px; /* Espaço entre os botões */
+        }
+
         .prototype-link {
             display: inline-block;
-            margin-top: 25px;
             padding: 12px 24px;
             background-color: var(--primary-color);
             color: #16213e;
@@ -134,11 +141,20 @@
             transition: all 0.2s ease-in-out;
         }
 
+        .prototype-link.kanban-link {
+            background-color: var(--secondary-color);
+        }
+
         .prototype-link:hover {
             background-color: white;
             transform: translateY(-2px);
             box-shadow: 0 4px 15px rgba(0, 245, 212, 0.3);
         }
+
+        .prototype-link.kanban-link:hover {
+            box-shadow: 0 4px 15px rgba(56, 189, 248, 0.3);
+        }
+
 
         .nav-button {
             position: absolute;
@@ -205,21 +221,6 @@
             z-index: 150;
         }
         
-        /* --- ESTILO DO LINK DO RODAPÉ CORRIGIDO --- */
-        footer a {
-            color: var(--primary-color);
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.2s;
-            background-color: rgba(22, 33, 62, 0.7);
-            padding: 5px 10px;
-            border-radius: 8px;
-        }
-        footer a:hover {
-            color: white;
-            background-color: var(--primary-color);
-        }
-
         .lightbox {
             position: fixed;
             top: 0;
@@ -271,6 +272,7 @@
             }
             .text-content { padding: 30px; }
             .nav-button { display: none; }
+            .slide-buttons { flex-direction: column; }
         }
     </style>
 </head>
@@ -286,7 +288,10 @@
                         <div class="text-content">
                             <h2>Conecta+: A Solução Completa</h2>
                             <p>Apresentamos o protótipo funcional da <strong>Conecta+</strong>, uma plataforma web projetada para conectar prestadores de serviços locais a clientes de forma <strong>rápida, segura e transparente</strong>.</p>
-                            <a href="https://by-lelaebirds.github.io/conecta-plus-mvp/" target="_blank" class="prototype-link">Acessar Protótipo</a>
+                            <div class="slide-buttons">
+                                <a href="https://by-lelaebirds.github.io/conecta-plus-mvp/" target="_blank" class="prototype-link">Acessar Protótipo</a>
+                                <a href="https://by-lelaebirds.github.io/SmartSolutions-Sprint-Scrum-/" target="_blank" class="prototype-link kanban-link">Ver Painel Kanban</a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -296,7 +301,10 @@
                         <div class="text-content">
                             <h2>1. Acesso Seguro e Direto</h2>
                             <p>A jornada começa com uma tela de <strong>login limpa e intuitiva</strong>, garantindo que clientes e prestadores entrem na plataforma com segurança e sem complicações.</p>
-                             <a href="https://by-lelaebirds.github.io/conecta-plus-mvp/" target="_blank" class="prototype-link">Acessar Protótipo</a>
+                            <div class="slide-buttons">
+                                <a href="https://by-lelaebirds.github.io/conecta-plus-mvp/" target="_blank" class="prototype-link">Acessar Protótipo</a>
+                                <a href="https://by-lelaebirds.github.io/SmartSolutions-Sprint-Scrum-/" target="_blank" class="prototype-link kanban-link">Ver Painel Kanban</a>
+                            </div>
                         </div>
                         <img src="login.png" alt="Tela de Login do Conecta+" class="zoomable">
                     </div>
@@ -308,7 +316,10 @@
                         <div class="text-content">
                             <h2>2. Crie Pedidos Detalhados</h2>
                             <p>O cliente pode <strong>publicar uma nova demanda</strong> adicionando título, categoria, descrição, prazo e até <strong>fotos</strong> para fornecer o máximo de detalhes ao prestador.</p>
-                             <a href="https://by-lelaebirds.github.io/conecta-plus-mvp/" target="_blank" class="prototype-link">Acessar Protótipo</a>
+                            <div class="slide-buttons">
+                                <a href="https://by-lelaebirds.github.io/conecta-plus-mvp/" target="_blank" class="prototype-link">Acessar Protótipo</a>
+                                <a href="https://by-lelaebirds.github.io/SmartSolutions-Sprint-Scrum-/" target="_blank" class="prototype-link kanban-link">Ver Painel Kanban</a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -318,7 +329,10 @@
                         <div class="text-content">
                             <h2>3. Seu Pedido, Publicado!</h2>
                             <p>Após a publicação, o novo serviço aparece instantaneamente no dashboard, pronto para <strong>receber propostas</strong> dos melhores profissionais da plataforma.</p>
-                             <a href="https://by-lelaebirds.github.io/conecta-plus-mvp/" target="_blank" class="prototype-link">Acessar Protótipo</a>
+                            <div class="slide-buttons">
+                                <a href="https://by-lelaebirds.github.io/conecta-plus-mvp/" target="_blank" class="prototype-link">Acessar Protótipo</a>
+                                <a href="https://by-lelaebirds.github.io/SmartSolutions-Sprint-Scrum-/" target="_blank" class="prototype-link kanban-link">Ver Painel Kanban</a>
+                            </div>
                         </div>
                         <img src="pedido-publicado.png" alt="Dashboard mostrando o novo pedido publicado no topo da lista" class="zoomable">
                     </div>
@@ -330,7 +344,10 @@
                         <div class="text-content">
                             <h2>4. Encontre o Profissional Ideal</h2>
                             <p>Uma vitrine de profissionais qualificados com informações essenciais como <strong>nome, especialidade e avaliação média</strong>, facilitando a escolha.</p>
-                             <a href="https://by-lelaebirds.github.io/conecta-plus-mvp/" target="_blank" class="prototype-link">Acessar Protótipo</a>
+                            <div class="slide-buttons">
+                                <a href="https://by-lelaebirds.github.io/conecta-plus-mvp/" target="_blank" class="prototype-link">Acessar Protótipo</a>
+                                <a href="https://by-lelaebirds.github.io/SmartSolutions-Sprint-Scrum-/" target="_blank" class="prototype-link kanban-link">Ver Painel Kanban</a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -340,7 +357,10 @@
                         <div class="text-content">
                             <h2>5. Perfis Detalhados para Confiança</h2>
                             <p>O perfil completo exibe <strong>portfólio, serviços, preços e avaliações</strong>, além de "Badges" que reconhecem as conquistas do prestador.</p>
-                             <a href="https://by-lelaebirds.github.io/conecta-plus-mvp/" target="_blank" class="prototype-link">Acessar Protótipo</a>
+                            <div class="slide-buttons">
+                                <a href="https://by-lelaebirds.github.io/conecta-plus-mvp/" target="_blank" class="prototype-link">Acessar Protótipo</a>
+                                <a href="https://by-lelaebirds.github.io/SmartSolutions-Sprint-Scrum-/" target="_blank" class="prototype-link kanban-link">Ver Painel Kanban</a>
+                            </div>
                         </div>
                         <img src="perfil.png" alt="Perfil detalhado de um prestador de serviços" class="zoomable">
                     </div>
@@ -352,7 +372,10 @@
                         <div class="text-content">
                             <h2>6. Comunicação Centralizada</h2>
                             <p>O <strong>chat interno</strong> permite negociar detalhes e ajustar orçamentos, mantendo todo o histórico da conversa salvo e organizado.</p>
-                             <a href="https://by-lelaebirds.github.io/conecta-plus-mvp/" target="_blank" class="prototype-link">Acessar Protótipo</a>
+                            <div class="slide-buttons">
+                                <a href="https://by-lelaebirds.github.io/conecta-plus-mvp/" target="_blank" class="prototype-link">Acessar Protótipo</a>
+                                <a href="https://by-lelaebirds.github.io/SmartSolutions-Sprint-Scrum-/" target="_blank" class="prototype-link kanban-link">Ver Painel Kanban</a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -362,7 +385,10 @@
                         <div class="text-content">
                             <h2>7. Feedback que Constrói Reputação</h2>
                             <p>Ao final do serviço, o cliente <strong>avalia o profissional</strong>, ajudando a manter a qualidade da plataforma e a guiar outros usuários.</p>
-                             <a href="https://by-lelaebirds.github.io/conecta-plus-mvp/" target="_blank" class="prototype-link">Acessar Protótipo</a>
+                            <div class="slide-buttons">
+                                <a href="https://by-lelaebirds.github.io/conecta-plus-mvp/" target="_blank" class="prototype-link">Acessar Protótipo</a>
+                                <a href="https://by-lelaebirds.github.io/SmartSolutions-Sprint-Scrum-/" target="_blank" class="prototype-link kanban-link">Ver Painel Kanban</a>
+                            </div>
                         </div>
                         <img src="avaliacao.png" alt="Tela de avaliação de um serviço concluído" class="zoomable">
                     </div>
@@ -374,7 +400,10 @@
                         <div class="text-content">
                             <h2>8. Experiência Personalizada</h2>
                             <p>A plataforma oferece a opção de <strong>alternar entre os temas claro e escuro</strong>, adaptando a interface à preferência de cada um.</p>
-                             <a href="https://by-lelaebirds.github.io/conecta-plus-mvp/" target="_blank" class="prototype-link">Acessar Protótipo</a>
+                            <div class="slide-buttons">
+                                <a href="https://by-lelaebirds.github.io/conecta-plus-mvp/" target="_blank" class="prototype-link">Acessar Protótipo</a>
+                                <a href="https://by-lelaebirds.github.io/SmartSolutions-Sprint-Scrum-/" target="_blank" class="prototype-link kanban-link">Ver Painel Kanban</a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -392,9 +421,8 @@
         <img src="" alt="Imagem ampliada" id="lightbox-img">
     </div>
 
-    <footer>
-        <a href="https://by-lelaebirds.github.io/conecta-plus-mvp/" target="_blank">Acessar Protótipo Online</a>
-    </footer>
+    <footer id="footer">
+        </footer>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
