@@ -46,7 +46,7 @@
 
         .presentation-container {
             width: 100%;
-            max-width: 900px; /* Reduzi um pouco para um layout mais focado */
+            max-width: 900px;
             margin: auto 20px;
             position: relative;
         }
@@ -68,21 +68,26 @@
             box-sizing: border-box;
             background-color: var(--card-bg-color);
             overflow: hidden;
-            padding: 30px; /* Espaçamento interno geral */
+            padding: 30px;
         }
 
-        /* --- NOVO LAYOUT DE BLOCO ÚNICO --- */
         .slide img {
             width: 100%;
-            height: auto; /* Altura se ajusta à proporção da imagem */
+            height: auto;
             display: block;
             border-radius: 12px;
             border: 2px solid var(--border-color);
-            margin-bottom: 25px; /* Espaço entre imagem e texto */
+            margin-bottom: 25px;
+            cursor: zoom-in; /* Indica que a imagem é clicável para zoom */
+            transition: transform 0.3s ease;
+        }
+        .slide img:hover {
+            transform: scale(1.02);
+            border-color: var(--primary-color);
         }
 
         .text-content {
-            text-align: center; /* Centraliza o texto para um visual mais limpo */
+            text-align: center;
         }
         
         .text-content h2 {
@@ -96,7 +101,7 @@
             line-height: 1.7;
             font-size: 1.1rem;
             color: var(--text-muted-color);
-            max-width: 700px; /* Limita a largura do texto para melhor leitura */
+            max-width: 700px;
             margin: 0 auto;
         }
         
@@ -141,6 +146,7 @@
             transform: translateX(-50%);
             display: flex;
             gap: 12px;
+            z-index: 50;
         }
 
         .dot {
@@ -166,7 +172,7 @@
             text-align: center;
             font-size: 14px;
             color: var(--text-muted-color);
-            z-index: 10;
+            z-index: 150; /* Z-index alto para garantir visibilidade */
         }
 
         footer a {
@@ -174,9 +180,48 @@
             text-decoration: none;
             font-weight: 500;
             transition: color 0.2s;
+            background-color: rgba(22, 33, 62, 0.7);
+            padding: 5px 10px;
+            border-radius: 8px;
         }
         footer a:hover {
             color: white;
+            background-color: var(--primary-color);
+        }
+
+        /* --- NOVO CÓDIGO PARA O LIGHTBOX (ZOOM) --- */
+        .lightbox {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.85);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            cursor: zoom-out;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+
+        .lightbox.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .lightbox img {
+            max-width: 90%;
+            max-height: 90%;
+            border-radius: 5px;
+            transform: scale(0.8);
+            transition: transform 0.3s ease;
+        }
+        
+        .lightbox.active img {
+            transform: scale(1);
         }
 
         @media (max-width: 1000px) {
@@ -200,7 +245,7 @@
             <div class="slides">
                 
                 <div class="slide">
-                    <img src="dashboard.png" alt="Tela de Dashboard do Conecta+">
+                    <img src="dashboard.png" alt="Tela de Dashboard do Conecta+" class="zoomable">
                     <div class="text-content">
                         <h2>Conecta+: A Solução Completa</h2>
                         <p>Apresentamos o protótipo funcional da <strong>Conecta+</strong>, uma plataforma web projetada para conectar prestadores de serviços locais a clientes de forma <strong>rápida, segura e transparente</strong>.</p>
@@ -208,7 +253,7 @@
                 </div>
 
                 <div class="slide">
-                    <img src="login.png" alt="Tela de Login do Conecta+">
+                    <img src="login.png" alt="Tela de Login do Conecta+" class="zoomable">
                     <div class="text-content">
                         <h2>1. Acesso Seguro e Direto</h2>
                         <p>A jornada começa com uma tela de <strong>login limpa e intuitiva</strong>, garantindo que clientes e prestadores entrem na plataforma com segurança e sem complicações.</p>
@@ -216,7 +261,7 @@
                 </div>
 
                 <div class="slide">
-                    <img src="novo-pedido.png" alt="Modal de criação de um novo pedido de serviço">
+                    <img src="novo-pedido.png" alt="Modal de criação de um novo pedido de serviço" class="zoomable">
                     <div class="text-content">
                         <h2>2. Crie Pedidos Detalhados</h2>
                         <p>O cliente pode <strong>publicar uma nova demanda</strong> adicionando título, categoria, descrição, prazo e até <strong>fotos</strong> para fornecer o máximo de detalhes ao prestador.</p>
@@ -224,7 +269,7 @@
                 </div>
 
                 <div class="slide">
-                    <img src="pedido-publicado.png" alt="Dashboard mostrando o novo pedido publicado no topo da lista">
+                    <img src="pedido-publicado.png" alt="Dashboard mostrando o novo pedido publicado no topo da lista" class="zoomable">
                     <div class="text-content">
                         <h2>3. Seu Pedido, Publicado!</h2>
                         <p>Após a publicação, o novo serviço aparece instantaneamente no dashboard, pronto para <strong>receber propostas</strong> dos melhores profissionais da plataforma.</p>
@@ -232,7 +277,7 @@
                 </div>
 
                 <div class="slide">
-                    <img src="prestadores.png" alt="Tela para encontrar prestadores de serviço">
+                    <img src="prestadores.png" alt="Tela para encontrar prestadores de serviço" class="zoomable">
                     <div class="text-content">
                         <h2>4. Encontre o Profissional Ideal</h2>
                         <p>Uma vitrine de profissionais qualificados com informações essenciais como <strong>nome, especialidade e avaliação média</strong>, facilitando a escolha.</p>
@@ -240,7 +285,7 @@
                 </div>
 
                 <div class="slide">
-                   <img src="perfil.png" alt="Perfil detalhado de um prestador de serviços">
+                   <img src="perfil.png" alt="Perfil detalhado de um prestador de serviços" class="zoomable">
                    <div class="text-content">
                         <h2>5. Perfis Detalhados para Confiança</h2>
                         <p>O perfil completo exibe <strong>portfólio, serviços, preços e avaliações</strong>, além de "Badges" que reconhecem as conquistas do prestador.</p>
@@ -248,7 +293,7 @@
                 </div>
 
                 <div class="slide">
-                    <img src="chat.png" alt="Tela de chat interno da plataforma">
+                    <img src="chat.png" alt="Tela de chat interno da plataforma" class="zoomable">
                     <div class="text-content">
                         <h2>6. Comunicação Centralizada</h2>
                         <p>O <strong>chat interno</strong> permite negociar detalhes e ajustar orçamentos, mantendo todo o histórico da conversa salvo e organizado.</p>
@@ -256,7 +301,7 @@
                 </div>
                 
                 <div class="slide">
-                    <img src="avaliacao.png" alt="Tela de avaliação de um serviço concluído">
+                    <img src="avaliacao.png" alt="Tela de avaliação de um serviço concluído" class="zoomable">
                     <div class="text-content">
                         <h2>7. Feedback que Constrói Reputação</h2>
                         <p>Ao final do serviço, o cliente <strong>avalia o profissional</strong>, ajudando a manter a qualidade da plataforma e a guiar outros usuários.</p>
@@ -264,7 +309,7 @@
                 </div>
 
                 <div class="slide">
-                    <img src="tema-escuro.png" alt="Interface do Conecta+ com o tema escuro ativado">
+                    <img src="tema-escuro.png" alt="Interface do Conecta+ com o tema escuro ativado" class="zoomable">
                     <div class="text-content">
                         <h2>8. Experiência Personalizada</h2>
                         <p>A plataforma oferece a opção de <strong>alternar entre os temas claro e escuro</strong>, adaptando a interface à preferência de cada um.</p>
@@ -280,18 +325,22 @@
         <div class="nav-dots"></div>
     </div>
     
+    <div class="lightbox" id="lightbox">
+        <img src="" alt="Imagem ampliada" id="lightbox-img">
+    </div>
+
     <footer>
         <a href="https://by-lelaebirds.github.io/conecta-plus-mvp/" target="_blank">Acessar Protótipo Online</a>
     </footer>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+            // --- CÓDIGO DOS SLIDES (SEM ALTERAÇÃO) ---
             const slidesContainer = document.querySelector('.slides');
             const slides = document.querySelectorAll('.slide');
             const prevBtn = document.getElementById('prevBtn');
             const nextBtn = document.getElementById('nextBtn');
             const dotsContainer = document.querySelector('.nav-dots');
-
             let currentSlide = 0;
             const totalSlides = slides.length;
 
@@ -307,11 +356,7 @@
 
             function updateSlideUi() {
                 slidesContainer.style.transform = `translateX(-${currentSlide * 100}%)`;
-                
-                dots.forEach((dot, index) => {
-                    dot.classList.toggle('active', index === currentSlide);
-                });
-
+                dots.forEach((dot, index) => dot.classList.toggle('active', index === currentSlide));
                 prevBtn.style.opacity = currentSlide === 0 ? '0.3' : '1';
                 prevBtn.style.pointerEvents = currentSlide === 0 ? 'none' : 'auto';
                 nextBtn.style.opacity = currentSlide === totalSlides - 1 ? '0.3' : '1';
@@ -324,28 +369,38 @@
             }
 
             nextBtn.addEventListener('click', () => {
-                if (currentSlide < totalSlides - 1) {
-                    currentSlide++;
-                    updateSlideUi();
-                }
+                if (currentSlide < totalSlides - 1) { currentSlide++; updateSlideUi(); }
             });
 
             prevBtn.addEventListener('click', () => {
-                if (currentSlide > 0) {
-                    currentSlide--;
-                    updateSlideUi();
-                }
+                if (currentSlide > 0) { currentSlide--; updateSlideUi(); }
             });
             
             document.addEventListener('keydown', (e) => {
-                if(e.key === 'ArrowRight') {
-                    nextBtn.click();
-                } else if (e.key === 'ArrowLeft') {
-                    prevBtn.click();
-                }
+                if(e.key === 'ArrowRight') nextBtn.click();
+                else if (e.key === 'ArrowLeft') prevBtn.click();
             });
 
             updateSlideUi();
+
+            // --- NOVO CÓDIGO PARA O LIGHTBOX (ZOOM) ---
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImg = document.getElementById('lightbox-img');
+            const zoomableImages = document.querySelectorAll('.zoomable');
+
+            zoomableImages.forEach(image => {
+                image.addEventListener('click', () => {
+                    // Pega o caminho da imagem clicada e a coloca no lightbox
+                    lightboxImg.src = image.src;
+                    // Mostra o lightbox
+                    lightbox.classList.add('active');
+                });
+            });
+
+            // Fecha o lightbox ao clicar nele
+            lightbox.addEventListener('click', () => {
+                lightbox.classList.remove('active');
+            });
         });
     </script>
 </body>
