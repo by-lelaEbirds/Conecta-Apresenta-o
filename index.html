@@ -8,10 +8,9 @@
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
 
         :root {
-            /* Cores adaptadas do seu style.css */
-            --bg-color: #1a1a2e; /* Fundo roxo escuro */
-            --card-bg-color: #16213e; /* Superfície do card */
-            --primary-color: #00F5D4; /* Verde-água/Ciano para destaque */
+            --bg-color: #1a1a2e;
+            --card-bg-color: #16213e;
+            --primary-color: #00F5D4;
             --text-color: #e0e0e0;
             --text-muted-color: #9fa8da;
             --shadow-color: rgba(0, 0, 0, 0.5);
@@ -46,7 +45,7 @@
 
         .presentation-container {
             width: 100%;
-            max-width: 950px; /* Um pouco maior para caber mais texto */
+            max-width: 1000px; /* Aumentei um pouco para dar mais espaço */
             margin: auto 20px;
             position: relative;
         }
@@ -72,26 +71,36 @@
 
         .slide-content {
             display: grid;
-            grid-template-columns: 1fr 1.2fr;
+            /* AJUSTE AQUI: Dei mais espaço para a imagem */
+            grid-template-columns: 1.2fr 1fr; 
             align-items: center;
             gap: 30px;
         }
 
         .slide:nth-child(even) .slide-content {
-            grid-template-columns: 1.2fr 1fr;
+             /* AJUSTE AQUI: Dei mais espaço para a imagem */
+            grid-template-columns: 1fr 1.2fr;
+        }
+
+        .slide .image-container {
+             /* AJUSTE AQUI: Altura dinâmica e não fixa */
+            height: 65vh; 
+            max-height: 550px; /* Limite para telas muito altas */
+            width: 100%;
+            overflow: hidden;
         }
 
         .slide img {
             width: 100%;
-            height: 520px;
-            object-fit: cover;
-            object-position: top; /* Garante que o topo da tela seja mostrado */
+            height: 100%;
+            object-fit: cover; /* Mantém o preenchimento elegante */
+            object-position: top; /* Garante que o topo da imagem seja sempre visível */
             display: block;
             transition: transform 0.4s ease-out;
         }
 
         .slide:hover img {
-            transform: scale(1.02);
+            transform: scale(1.03);
         }
 
         .text-content {
@@ -197,9 +206,8 @@
             .slide-content, .slide:nth-child(even) .slide-content {
                 grid-template-columns: 1fr;
             }
-            .slide img {
-                height: 280px;
-                border-radius: 0;
+            .slide .image-container {
+                height: 30vh; /* Ajuste para mobile */
             }
             .text-content {
                 padding: 30px;
@@ -208,7 +216,7 @@
                 bottom: -35px;
             }
             .nav-button {
-                display: none; /* Esconde setas em telas menores */
+                display: none;
             }
         }
     </style>
@@ -221,7 +229,9 @@
                 
                 <div class="slide">
                     <div class="slide-content">
-                        <img src="dashboard.png" alt="Tela de Dashboard do Conecta+">
+                        <div class="image-container">
+                            <img src="dashboard.png" alt="Tela de Dashboard do Conecta+">
+                        </div>
                         <div class="text-content">
                             <h2>Conecta+: A Solução Completa</h2>
                             <p>Apresentamos o protótipo funcional da <strong>Conecta+</strong>, uma plataforma web projetada para conectar prestadores de serviços locais a clientes de forma <strong>rápida, segura e transparente</strong>. Este é o seu centro de controle, onde todos os seus pedidos de serviço são gerenciados.</p>
@@ -231,17 +241,21 @@
 
                 <div class="slide">
                     <div class="slide-content">
-                        <img src="login.png" alt="Tela de Login do Conecta+">
                         <div class="text-content">
                             <h2>1. Acesso Seguro e Direto</h2>
                             <p>A jornada começa com uma tela de <strong>login limpa e intuitiva</strong>. O acesso é simplificado, garantindo que clientes e prestadores entrem na plataforma com segurança e sem complicações, prontos para resolver ou oferecer serviços.</p>
+                        </div>
+                        <div class="image-container">
+                            <img src="login.png" alt="Tela de Login do Conecta+">
                         </div>
                     </div>
                 </div>
 
                 <div class="slide">
                     <div class="slide-content">
-                        <img src="novo-pedido.png" alt="Modal de criação de um novo pedido de serviço">
+                        <div class="image-container">
+                             <img src="novo-pedido.png" alt="Modal de criação de um novo pedido de serviço">
+                        </div>
                         <div class="text-content">
                             <h2>2. Crie Pedidos Detalhados</h2>
                             <p>Com o clique de um botão, o cliente pode abrir um formulário para <strong>publicar uma nova demanda</strong>. É possível adicionar título, categoria, descrição, prazo desejado e até <strong>anexar fotos</strong> para fornecer o máximo de detalhes ao prestador.</p>
@@ -251,17 +265,21 @@
 
                 <div class="slide">
                     <div class="slide-content">
-                        <img src="pedido-publicado.png" alt="Dashboard mostrando o novo pedido publicado no topo da lista">
-                        <div class="text-content">
+                         <div class="text-content">
                             <h2>3. Seu Pedido, Publicado!</h2>
                             <p>Após a publicação, o novo serviço aparece instantaneamente no topo do dashboard "Meus Pedidos". O status inicial é "Aberto", indicando que o cliente agora está <strong>pronto para receber propostas</strong> dos melhores profissionais da plataforma.</p>
+                        </div>
+                        <div class="image-container">
+                            <img src="pedido-publicado.png" alt="Dashboard mostrando o novo pedido publicado no topo da lista">
                         </div>
                     </div>
                 </div>
 
                 <div class="slide">
                     <div class="slide-content">
-                        <img src="prestadores.png" alt="Tela para encontrar prestadores de serviço">
+                        <div class="image-container">
+                             <img src="prestadores.png" alt="Tela para encontrar prestadores de serviço">
+                        </div>
                         <div class="text-content">
                             <h2>4. Encontre o Profissional Ideal</h2>
                             <p>Na aba "Encontrar Prestadores", o cliente tem acesso a uma vitrine de profissionais qualificados. Cada card exibe informações essenciais como <strong>nome, especialidade e avaliação média</strong>, facilitando a primeira triagem.</p>
@@ -271,17 +289,21 @@
 
                 <div class="slide">
                     <div class="slide-content">
-                        <img src="perfil.png" alt="Perfil detalhado de um prestador de serviços">
                         <div class="text-content">
                             <h2>5. Perfis Detalhados para Confiança</h2>
                             <p>Ao clicar em um profissional, o cliente visualiza um perfil completo com <strong>descrição, portfólio, lista de serviços, preços estimados e avaliações</strong> de outros clientes. Um diferencial são as "Badges", que gamificam e reconhecem as conquistas do prestador.</p>
+                        </div>
+                        <div class="image-container">
+                           <img src="perfil.png" alt="Perfil detalhado de um prestador de serviços">
                         </div>
                     </div>
                 </div>
 
                 <div class="slide">
                     <div class="slide-content">
-                        <img src="chat.png" alt="Tela de chat interno da plataforma">
+                        <div class="image-container">
+                            <img src="chat.png" alt="Tela de chat interno da plataforma">
+                        </div>
                         <div class="text-content">
                             <h2>6. Comunicação Centralizada</h2>
                             <p>Diga adeus à desorganização. O <strong>chat interno</strong> permite que clientes e prestadores negociem detalhes, ajustem orçamentos e combinem prazos, mantendo todo o histórico da conversa salvo e associado ao serviço específico.</p>
@@ -291,17 +313,21 @@
                 
                 <div class="slide">
                     <div class="slide-content">
-                        <img src="avaliacao.png" alt="Tela de avaliação de um serviço concluído">
                         <div class="text-content">
                             <h2>7. Feedback que Constrói Reputação</h2>
                             <p>Após a conclusão de um serviço, o cliente é convidado a <strong>avaliar o profissional</strong> com uma nota de 1 a 5 estrelas e um comentário. Esse feedback é crucial para manter a qualidade da plataforma e ajudar outros usuários a fazerem boas escolhas.</p>
+                        </div>
+                        <div class="image-container">
+                            <img src="avaliacao.png" alt="Tela de avaliação de um serviço concluído">
                         </div>
                     </div>
                 </div>
 
                 <div class="slide">
                     <div class="slide-content">
-                        <img src="tema-escuro.png" alt="Interface do Conecta+ com o tema escuro ativado">
+                        <div class="image-container">
+                            <img src="tema-escuro.png" alt="Interface do Conecta+ com o tema escuro ativado">
+                        </div>
                         <div class="text-content">
                             <h2>8. Experiência Personalizada</h2>
                             <p>Pensando no conforto visual do usuário, a plataforma oferece a opção de <strong>alternar entre os temas claro e escuro</strong>. A escolha é salva e persiste durante toda a navegação, adaptando a interface à preferência de cada um.</p>
@@ -373,7 +399,6 @@
                 }
             });
             
-            // Navegação pelo teclado
             document.addEventListener('keydown', (e) => {
                 if(e.key === 'ArrowRight') {
                     nextBtn.click();
